@@ -1,5 +1,5 @@
-from django.contrib.auth import login, authenticate
-from django.shortcuts import render, HttpResponse
+from django.contrib.auth import login, authenticate, logout
+from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 
@@ -37,6 +37,14 @@ class RegistrationView(TemplateView):
         new_user.save()
         return HttpResponse("OK")
 
+
+class LogoutView(TemplateView):
+
+    template_name = 'login.html'
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('/')
 
 class ListUserView(TemplateView):
 

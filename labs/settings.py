@@ -106,6 +106,8 @@ AUTHENTICATION_BACKENDS = [
     'main.auth_backend.AuthBackend'
 ]
 
+LOGOUT_REDIRECT_URL = 'login/'
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
