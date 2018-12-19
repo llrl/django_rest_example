@@ -1,6 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 
 from .forms import LoginForm
 from .forms import RegistrationForm
@@ -39,4 +40,9 @@ class RegistrationView(TemplateView):
 
 class ListUserView(TemplateView):
 
-    pass
+    template_name = 'user_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users'] = User.objects.all()
+        return context
