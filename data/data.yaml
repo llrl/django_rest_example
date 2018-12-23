@@ -1,0 +1,16 @@
+- model: main.Role
+  pk: 1
+  fields:
+    name: TeamA
+- model: main.Role
+  pk: 2
+  fields:
+    name: TeamB
+- model: main.Role
+  pk: 3
+  fields:
+    name: TeamC
+- model: main.Role
+  pk: 4
+  fields:
+    name: Admin

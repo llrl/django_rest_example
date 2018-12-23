@@ -4,12 +4,15 @@
 <form action="login" method="post">
     {% csrf_token %}
     <label for="username">Your login: </label>
+    <br>
     <input id="username" type="text" name="username" value="{{ current_name }}">
+    <br>
     <label for="password">Your password: </label>
+    <br>
     <input id="password" type="password" name="password" value="{{ current_password }}">
+    <br>
     <input type="submit" value="OK">
 </form>
-<a href="registration"> Create new account </a>
 
 <script>
 new Vue({

@@ -1,8 +1,89 @@
-<h1>Users</h1>
-<ul>
-{% for user in users %}
-    <li>Username: {{ user.username }}    First_name: {{ user.first_name }} - Last_name: {{ user.last_name }} </li>
-{% empty %}
-    <li>No articles yet.</li>
-{% endfor %}
-</ul>
+{% extends "base.html" %}
+{% block content %}
+
+<h1>You auth as {{ profile }}, {{ profile.roles }}</h1>
+<a href="/logout">Log out</a>
+<row justify="center" offset="6">
+    <i-col offset="2">  
+        <row :gutter="20">
+            <i-col span="4">
+                <div> 
+                    Username
+                </div>
+            </i-col>
+            <i-col span="4">
+                <div>
+                    Fullname
+                </div>
+            </i-col>
+            <i-col span="4">
+                <div>
+                    Roles
+                </div>
+            </i-col>
+            {% if is_superuser %}
+            <i-col span="4">
+                <div>
+                    Edit
+                </div>
+            </i-col>    
+            <i-col span="4">
+                <div>
+                    Delete
+                </div>
+            </i-col>
+            {% endif %}    
+        </row>
+        <br>
+        {% for user in users %}
+        <row :gutter="20">
+            <i-col span="4">
+                <div> 
+                    {{ user.username }}
+                </div>
+            </i-col>
+            <i-col span="4">
+                <div>
+                    - {{ user.first_name }} {{ user.last_name }} -
+                </div>
+            </i-col>
+            <i-col span="4">
+                <div>
+                    [
+                    {% for role in user.roles.all %}
+                        <a href='/list_users/{{ role.id }}'>{{role}} </a>
+                    {% endfor %}
+                    ]
+                </div>
+            </i-col>
+            {% if is_superuser %}
+            <i-col span="4">
+                <div>
+                    <a href="/edit_user/{{ user.id }}">Edit user</a>
+                </div>
+            </i-col>    
+            <i-col span="4">
+                <div>
+                    <a href="/delete_user/{{ user.id }}">Delete user</a>
+                </div>
+            </i-col>
+            {% endif %}
+        </row>
+        <br>
+        {% endfor %}
+    </i-col>
+</row>
+
+{% if is_superuser %}
+<row>
+    <i-col>
+        <a href='/create_user'><h3>Create new user</h3></a>
+    </i-col>
+</row>
+
+{% endif %}
+
+<script>
+new Vue({el: '#app'})
+</script>
+{% endblock content %}
