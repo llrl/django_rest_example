@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>You auth as {{ profile }}, {{ profile.roles }}</h1>
+<h1>You auth as {{ profile }}, role: 
+    [
+    {% for role in profile.roles.all %}
+        {{ role }}
+    {% endfor %}
+    ]
+</h1>
 <a href="/logout">Log out</a>
 <row justify="center" offset="6">
     <i-col offset="2">  
